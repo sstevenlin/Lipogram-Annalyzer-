@@ -1,0 +1,52 @@
+public class LipogramAnalyzer {
+  private String lipogramText;
+   public LipogramAnalyzer(String text) {
+     lipogramText = text;
+   }
+  
+  public String mark(char letter){
+    String result = "";
+    
+    for(int i=0; i< lipogramText.length(); i++) {
+      if(lipogramText.substring(i, i+1).toLowerCase().equals("e")) {
+        result += "#";
+      }
+      else {
+        result += lipogramText.substring(i, i+1);
+      }
+    }
+    return(result);
+  }
+  public String allWordsWith(char letter){
+    String string = " " + lipogramText + " ";
+    for (int i=0; i<string.length(); i++) {
+      if(string.charAt(i)=='(' || string.charAt(i)==')' || string.charAt(i)=='"' || string.charAt(i)==',' || string.charAt(i)=='.'){
+        string = string.substring(0, i) + " " + string.substring(i+1);
+      }
+
+    }
+    String result = "";
+    String word = "";
+    int startIndex = 0;
+    int endIndex = 0;
+    boolean loop = true;
+    
+    while(loop) {
+      startIndex = string.indexOf(" ", endIndex)+1;
+      endIndex = string.indexOf(" ", startIndex);
+      if(endIndex == -1) {
+        word = string.substring(startIndex);
+        loop = false;
+      }
+      else {
+        word = string.substring(startIndex, endIndex);
+      }
+      for(int i=0; i<word.length(); i++)
+        if(word.charAt(i) == 'e') {
+          result = result + word + "\n";
+          break;
+        }
+    }
+    return(result);
+  }
+}
